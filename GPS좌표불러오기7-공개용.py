@@ -19,13 +19,15 @@ def myf브이월드인증키불러오기():
     import dropbox #pip install dropbox, 드랍박스에서 브이월드 인증키를 받아옴. 인증키 갱신때문에 프로그램을 분기별로 만들기 귀찮아서 요렇게 받아옴. 추후 갱신이 필요하면 드롭박스 파일만 갈으면 됨.
     ACCESS_TOKEN = "드롭박스 엑세스 키를 넣어주세요"
     dbx = dropbox.Dropbox(ACCESS_TOKEN)
-    with open("C:\\Users\\Public\\apiTokenKey.txt", "wb") as f:
-        metadata, res = dbx.sharing_get_shared_link_file("드롭박스에서 브이월드인증키를 저장한 파일링크를 걸어주세요")
+    with open("apiTokenKey", "wb") as f:
+        metadata, res = dbx.sharing_get_shared_link_file("https://www.dropbox.com/s/ovevwg7npc1jpd9/apiTokenKey.txt?dl=0")
         f.write(res.content)
     try:
-        with open("C:\\Users\\Public\\apiTokenKey.txt", "r", encoding='UTF-8') as f:
+        with open("apiTokenKey", "r", encoding='UTF-8') as f:
             myv주소변환인증키 = f.readline().rstrip("\n") #첫줄이 인증키
             ##print(myv주소변환인증키)
+        f.close()
+        os.remove("apiTokenKey")
     except:
         myv주소변환인증키 = '이도 저도 모르겠다면 브이월드에서 발급받으신 인증키를 여기다 적어주세요'
     return myv주소변환인증키
